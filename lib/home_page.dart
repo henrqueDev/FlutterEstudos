@@ -49,9 +49,32 @@ class HomepageState extends State<Homepage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Home Page'),
+          toolbarHeight: 60.0,
           /*,
           backgroundColor: Colors.red,*/
-          actions: const [CustomSwitch()],
+          actions: [
+            Column(
+              children: [
+                FloatingActionButton(
+                    tooltip: "Sair",
+                    elevation: 0,
+                    backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+                    splashColor: const Color.fromARGB(0, 0, 0, 0),
+                    focusColor: const Color.fromARGB(0, 0, 0, 0),
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/');
+                    },
+                    child: const Icon(
+                      Icons.door_front_door_rounded,
+                      grade: 0,
+                      fill: 0,
+                      shadows: null,
+                      size: 40.0,
+                    )),
+              ],
+            ),
+            const CustomSwitch(),
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.green,
@@ -60,7 +83,7 @@ class HomepageState extends State<Homepage> {
               counter++;
             });
             PersonDataSource d = PersonDataSource();
-            d.insertPerson(Person(name: "Jao", age: 16));
+            await d.insertPerson(Person(name: "Jao", age: 16));
           },
           child: const Icon(Icons.add),
         ),
@@ -75,11 +98,9 @@ class HomepageState extends State<Homepage> {
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                        Icon(
+                        const Icon(
                           Icons.analytics_rounded,
-                          color: AppController.instance.isDarkTheme
-                              ? const Color.fromARGB(255, 0, 81, 255)
-                              : const Color.fromARGB(255, 22, 107, 255),
+                          color: Color.fromARGB(255, 0, 81, 255),
                           size: 250.0,
                         ),
                         Title(
@@ -93,28 +114,31 @@ class HomepageState extends State<Homepage> {
                                   fontSize: 20.0, fontWeight: FontWeight.bold),
                             ))
                       ])),
-                  Card(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                        Icon(
-                          Icons.monetization_on_rounded,
-                          color: AppController.instance.isDarkTheme
-                              ? const Color.fromARGB(255, 0, 255, 51)
-                              : const Color.fromARGB(255, 84, 255, 115),
-                          size: 250.0,
-                        ),
-                        Title(
-                            title: "Cobranças",
-                            color: AppController.instance.isDarkTheme
-                                ? Colors.white
-                                : Colors.black,
-                            child: const Text(
-                              "Cobranças",
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold),
-                            ))
-                      ])),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(context, '/clients');
+                      },
+                      child: Card(
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                            const Icon(
+                              Icons.monetization_on_rounded,
+                              color: Color.fromARGB(255, 0, 255, 51),
+                              size: 250.0,
+                            ),
+                            Title(
+                                title: "Cobranças",
+                                color: AppController.instance.isDarkTheme
+                                    ? Colors.white
+                                    : Colors.black,
+                                child: const Text(
+                                  "Cobranças",
+                                  style: TextStyle(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold),
+                                ))
+                          ]))),
                 ])));
 
     /* (Container(
