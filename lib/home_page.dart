@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_howrld/app_controller.dart';
+import 'package:hello_howrld/client_list.dart';
 import 'package:hello_howrld/model/person.dart';
 import 'package:logger/logger.dart';
 import 'package:hello_howrld/data/sqlite_person_datasource.dart';
@@ -56,6 +57,7 @@ class HomepageState extends State<Homepage> {
             Column(
               children: [
                 FloatingActionButton(
+                    heroTag: "logout",
                     tooltip: "Sair",
                     elevation: 0,
                     backgroundColor: const Color.fromARGB(0, 0, 0, 0),
@@ -77,6 +79,7 @@ class HomepageState extends State<Homepage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          heroTag: "add",
           backgroundColor: Colors.green,
           onPressed: () async {
             setState(() {
@@ -116,7 +119,10 @@ class HomepageState extends State<Homepage> {
                       ])),
                   GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, '/clients');
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return const ClientList();
+                        }));
                       },
                       child: Card(
                           child: Column(

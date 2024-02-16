@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:equatable/equatable.dart';
-import 'package:hello_howrld/data/data_person_constants.dart';
 
 class Person extends Equatable {
   late int? id;

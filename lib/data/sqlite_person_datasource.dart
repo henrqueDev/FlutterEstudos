@@ -7,21 +7,24 @@ import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class PersonDataSource {
-  Future<Database> _getDataSource() async {
-    return await openDatabase(
+  static Database? _dataSource;
+
+  Future<Database?> _getDataSource() async {
+    _dataSource ??= await openDatabase(
       join(await getDatabasesPath(), databaseName),
       onCreate: (db, version) async {
         await db.execute(createPessoasTable);
       },
       version: databaseVersion,
     );
+    return _dataSource;
   }
 
   Future<Person?> getByIndex(index) async {
     WidgetsFlutterBinding.ensureInitialized();
     final db = await _getDataSource();
     Person cliente = await db
-        .rawQuery('SELECT * FROM Table LIMIT 1 OFFSET $index; ') as Person;
+        ?.rawQuery('SELECT * FROM Table LIMIT 1 OFFSET $index; ') as Person;
 
     return cliente;
   }
@@ -30,11 +33,11 @@ class PersonDataSource {
     WidgetsFlutterBinding.ensureInitialized();
     try {
       final db = await _getDataSource();
-      final List<Map<String, dynamic>> clientes =
-          await db.query(pessoasTableName);
+      final List<Map<String, Object?>>? clientes =
+          await db?.query(pessoasTableName);
       var logger = Logger();
       logger.log(Logger.level, clientes);
-      return List.generate(clientes.length, (index) {
+      return List.generate(clientes!.length, (index) {
         logger.log(Logger.level, PersonModel.fromMap(clientes[index]));
         return PersonModel.fromMap(clientes[index]);
       });
@@ -53,7 +56,7 @@ class PersonDataSource {
         '''insert into $pessoasTableName($pessoasColumnNome, $pessoasColumnIdade)
       VALUES('${person.name}', ${person.age})
     ''');*/
-    await db.insert(
+    await db!.insert(
       pessoasTableName,
       person.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,

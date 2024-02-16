@@ -21,8 +21,7 @@ class AppWidget extends StatelessWidget {
               routes: {
                 "/": (context) => const LoginPage(),
                 "/homepage": (context) =>
-                    const Homepage(title: "Página principal"),
-                "/clients": (context) => const ClientList(),
+                    const Homepage(title: "Página principal")
               });
         });
   }

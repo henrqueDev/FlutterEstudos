@@ -1,3 +1,5 @@
+// ignore: must_be_immutable
+
 import 'package:hello_howrld/data/data_person_constants.dart';
 import 'package:hello_howrld/model/person.dart';
 
