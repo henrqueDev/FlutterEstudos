@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hello_howrld/app_controller.dart';
-import 'package:hello_howrld/client_list.dart';
-import 'package:hello_howrld/model/person.dart';
+import 'package:hello_howrld/pages/app/app_controller.dart';
+import 'package:hello_howrld/pages/clientes/client_list.dart';
 import 'package:logger/logger.dart';
-import 'package:hello_howrld/data/sqlite_person_datasource.dart';
 
 class Homepage extends StatefulWidget {
   final String title;
@@ -77,18 +75,6 @@ class HomepageState extends State<Homepage> {
             ),
             const CustomSwitch(),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          heroTag: "add",
-          backgroundColor: Colors.green,
-          onPressed: () async {
-            setState(() {
-              counter++;
-            });
-            PersonDataSource d = PersonDataSource();
-            await d.insertPerson(Person(name: "Jao", age: 16));
-          },
-          child: const Icon(Icons.add),
         ),
         body: SizedBox(
             width: MediaQuery.of(context).size.width,

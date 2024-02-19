@@ -3,7 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hello_howrld/app_widget.dart';
+import 'package:hello_howrld/pages/app/app_widget.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 Future main() async {

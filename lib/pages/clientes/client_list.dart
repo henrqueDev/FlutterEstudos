@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hello_howrld/client_details.dart';
-import 'package:hello_howrld/data/sqlite_person_datasource.dart';
-import 'package:hello_howrld/model/person.dart';
-import 'package:hello_howrld/model/person_model.dart';
+import 'package:hello_howrld/pages/clientes/client_details.dart';
+import 'package:hello_howrld/data/sqlite_cliente_datasource.dart';
+import 'package:hello_howrld/model/cliente/cliente.dart';
+import 'package:hello_howrld/model/cliente/cliente_model.dart';
 
 class ClientList extends StatefulWidget {
   const ClientList({super.key});
@@ -12,24 +12,23 @@ class ClientList extends StatefulWidget {
 }
 
 class _ClientListState extends State<ClientList> {
-  PersonDataSource db = PersonDataSource();
-  List<PersonModel> rep = [];
+  DataSource db = DataSource();
+  List<ClienteModel> rep = [];
+
   @override
   void initState() {
     super.initState();
     _getData();
   }
 
-  Future<List<PersonModel>> _getData() async {
+  Future<List<ClienteModel>> _getData() async {
     return await db.getAll();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Clientes"),
-      ),
+      appBar: AppBar(title: const Text("Clientes")),
       body: FutureBuilder(
         future: _getData(),
         builder: (context, snapshot) {
@@ -37,13 +36,13 @@ class _ClientListState extends State<ClientList> {
             itemCount: snapshot.data?.length,
             itemBuilder: (context, index) {
               if (snapshot.data?[index] != null) {
-                Person client = snapshot.data![index];
+                Cliente cliente = snapshot.data![index];
                 return ListTile(
-                  title: Text("${client.name}id - ${client.id}"),
+                  title: Text("${cliente.nome}id - ${cliente.id}"),
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                      return ClientDetails(person: client);
+                      return ClientDetails(cliente: cliente);
                     }));
                   },
                 );
@@ -52,6 +51,15 @@ class _ClientListState extends State<ClientList> {
             },
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        heroTag: "add",
+        backgroundColor: Colors.green,
+        onPressed: () async {
+          DataSource d = DataSource();
+          await d.insertCliente(Cliente(nome: "Jao", idade: 16));
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

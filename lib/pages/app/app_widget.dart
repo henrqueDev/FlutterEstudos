@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hello_howrld/app_controller.dart';
-import 'package:hello_howrld/client_list.dart';
-import 'package:hello_howrld/home_page.dart';
-import 'package:hello_howrld/login_page.dart';
+import 'package:hello_howrld/pages/app/app_controller.dart';
+import 'package:hello_howrld/pages/homepage/home_page.dart';
+import 'package:hello_howrld/pages/login/login_page.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
