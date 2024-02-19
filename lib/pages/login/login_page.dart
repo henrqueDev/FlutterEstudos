@@ -9,8 +9,6 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-/// Flutter code sample for [MaterialStateProperty].
-
 class _LoginPageState extends State<LoginPage> {
   String email = "";
   String password = "";

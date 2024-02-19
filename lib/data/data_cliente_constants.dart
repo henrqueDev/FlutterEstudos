@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 const String databaseName = "lanchonete.db";
 
 const int databaseVersion = 1;

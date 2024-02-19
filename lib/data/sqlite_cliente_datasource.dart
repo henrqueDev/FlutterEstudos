@@ -9,6 +9,9 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 class DataSource {
   static Database? _dataSource;
 
+  DataSource._privateConstructor();
+  static final DataSource instance = DataSource._privateConstructor();
+
   Future<Database?> _getDataSource() async {
     _dataSource ??= await openDatabase(
       join(await getDatabasesPath(), databaseName),
@@ -47,8 +50,6 @@ class DataSource {
   }
 
   Future<void> insertCliente(Cliente cliente) async {
-    // Get a reference to the database.
-
     WidgetsFlutterBinding.ensureInitialized();
 
     final db = await _getDataSource();
@@ -58,6 +59,5 @@ class DataSource {
       cliente.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-    db.close();
   }
 }
