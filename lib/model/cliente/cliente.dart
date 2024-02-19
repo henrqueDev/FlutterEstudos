@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, non_constant_identifier_names
 
 import 'dart:ffi';
 
@@ -10,7 +10,15 @@ class Cliente extends Equatable {
   final String nome;
   final int idade;
 
-  Cliente({this.id, required this.idade, required this.nome, this.saldo});
+  final int? instituicao_fk;
+
+  Cliente({
+    this.id,
+    this.saldo,
+    required this.nome,
+    required this.idade,
+    required this.instituicao_fk,
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -18,12 +26,13 @@ class Cliente extends Equatable {
       'saldo': saldo,
       'nome': nome,
       'idade': idade,
+      'instituicao_fk': instituicao_fk
     };
   }
 
   @override
   String toString() {
-    return 'Person{id: $id, nome: $nome, idade: $idade, saldo: $saldo}';
+    return 'Person{id: $id, nome: $nome, idade: $idade, saldo: $saldo, instituicao_fk: $instituicao_fk}';
   }
 
   @override

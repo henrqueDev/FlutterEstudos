@@ -1,31 +1,35 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
-import 'package:hello_howrld/data/data_cliente_constants.dart';
+import 'package:hello_howrld/data/clientes/data_cliente_constants.dart';
+import 'package:hello_howrld/data/database/database_constants.dart';
 import 'package:hello_howrld/model/cliente/cliente.dart';
 import 'package:hello_howrld/model/cliente/cliente_model.dart';
 import 'package:logger/logger.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-class DataSource {
-  static Database? _dataSource;
+class ClientesDataSource {
+  static Database? _ClientesdataSource;
 
-  DataSource._privateConstructor();
-  static final DataSource instance = DataSource._privateConstructor();
+  ClientesDataSource._privateConstructor();
+  static final ClientesDataSource instance =
+      ClientesDataSource._privateConstructor();
 
-  Future<Database?> _getDataSource() async {
-    _dataSource ??= await openDatabase(
+  Future<Database?> _getClientesDataSource() async {
+    _ClientesdataSource ??= await openDatabase(
       join(await getDatabasesPath(), databaseName),
       onCreate: (db, version) async {
-        await db.execute(createclientesTable);
+        await db.execute(createAllTables);
       },
       version: databaseVersion,
     );
-    return _dataSource;
+    return _ClientesdataSource;
   }
 
   Future<Cliente?> getByIndex(index) async {
     WidgetsFlutterBinding.ensureInitialized();
-    final db = await _getDataSource();
+    final db = await _getClientesDataSource();
     Cliente cliente = await db
         ?.rawQuery('SELECT * FROM Table LIMIT 1 OFFSET $index; ') as Cliente;
 
@@ -35,7 +39,7 @@ class DataSource {
   Future<List<ClienteModel>> getAll() async {
     WidgetsFlutterBinding.ensureInitialized();
     try {
-      final db = await _getDataSource();
+      final db = await _getClientesDataSource();
       final List<Map<String, Object?>>? clientes =
           await db?.query(clientesTableName);
       var logger = Logger();
@@ -52,7 +56,7 @@ class DataSource {
   Future<void> insertCliente(Cliente cliente) async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    final db = await _getDataSource();
+    final db = await _getClientesDataSource();
 
     await db!.insert(
       clientesTableName,

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hello_howrld/pages/clientes/client_details.dart';
-import 'package:hello_howrld/data/sqlite_cliente_datasource.dart';
+import 'package:hello_howrld/data/clientes/sqlite_cliente_datasource.dart';
 import 'package:hello_howrld/model/cliente/cliente.dart';
 import 'package:hello_howrld/model/cliente/cliente_model.dart';
 import 'package:hello_howrld/pages/clientes/client_list_controller.dart';
@@ -24,7 +24,7 @@ class _ClientListState extends State<ClientList> {
   }
 
   Future<List<ClienteModel>> _getData() async {
-    return await DataSource.instance.getAll();
+    return await ClientesDataSource.instance.getAll();
   }
 
   @override
@@ -60,7 +60,7 @@ class _ClientListState extends State<ClientList> {
         onPressed: () {
           setState(() {
             ClientListController.controller
-                .addClient(Cliente(nome: "ola", idade: 20));
+                .addClient(Cliente(nome: "ola", idade: 20, instituicao_fk: 1));
           });
         },
         child: const Icon(Icons.add),
