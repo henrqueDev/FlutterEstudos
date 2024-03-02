@@ -8,8 +8,7 @@ class ClientListController extends ChangeNotifier {
   static final ClientListController controller = ClientListController();
 
   addClient(Cliente cliente) {
-    ClientesDataSource.instance
-        .insertCliente(Cliente(nome: "Jao", idade: 16, instituicao_fk: 1));
+    ClientesDataSource.instance.insertCliente(cliente);
     notifyListeners();
   }
 }

@@ -7,22 +7,22 @@ class ClienteModel extends Cliente {
   ClienteModel({
     id,
     required nome,
-    required idade,
     required saldo,
+    required numero_celular,
     required instituicao_fk,
   }) : super(
             id: id,
             nome: nome,
-            idade: idade,
             saldo: saldo,
+            numero_celular: numero_celular,
             instituicao_fk: instituicao_fk);
 
   factory ClienteModel.fromMap(Map<String, Object?> map) {
     return ClienteModel(
         id: map[clientesColumnID],
-        idade: map[clientesColumnIdade],
         nome: map[clientesColumnNome],
         saldo: map[clientesColumnSaldo],
+        numero_celular: map[clientesColumnNumeroCelular],
         instituicao_fk: map[clientesColumnInstituicaoFK]);
   }
 }

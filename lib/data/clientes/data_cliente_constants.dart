@@ -8,19 +8,12 @@ const String clientesColumnID = "id";
 
 const String clientesColumnNome = "nome";
 
-const String clientesColumnIdade = "idade";
-
 const String clientesColumnSaldo = "saldo";
+
+const String clientesColumnNumeroCelular = "numero_celular";
 
 const String clientesColumnInstituicaoFK = "instituicao_fk";
 
 const String createClientesTable = '''
-  CREATE TABLE $clientesTableName(
-    $clientesColumnID INTEGER PRIMARY KEY, 
-    $clientesColumnNome TEXT, 
-    $clientesColumnIdade INTEGER, 
-    $clientesColumnSaldo FLOAT,
-    $clientesColumnInstituicaoFK INTEGER,
-    FOREIGN_KEY $clientesColumnInstituicaoFK REFERENCES $instituicoesTableName($instituicoesColumnID)
-  )
+  CREATE TABLE $clientesTableName($clientesColumnID INTEGER PRIMARY KEY, $clientesColumnNome TEXT, $clientesColumnSaldo FLOAT,$clientesColumnNumeroCelular TEXT,$clientesColumnInstituicaoFK INTEGER,FOREIGN_KEY $clientesColumnInstituicaoFK REFERENCES $instituicoesTableName($instituicoesColumnID))
 ''';

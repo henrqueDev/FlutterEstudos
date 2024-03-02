@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_howrld/model/instituicao/instituicao.dart';
 import 'package:hello_howrld/pages/app/app_controller.dart';
 import 'package:hello_howrld/pages/homepage/home_page.dart';
 import 'package:hello_howrld/pages/login/login_page.dart';
@@ -19,8 +20,10 @@ class AppWidget extends StatelessWidget {
                       : Brightness.light),
               routes: {
                 "/": (context) => const LoginPage(),
-                "/homepage": (context) =>
-                    const Homepage(title: "Página principal")
+                "/homepage": (context) => Homepage(
+                      title: "Página principal",
+                      instituicao: Instituicao(nome: 'Colegio 1'),
+                    )
               });
         });
   }

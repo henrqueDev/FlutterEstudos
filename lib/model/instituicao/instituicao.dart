@@ -9,6 +9,13 @@ class Instituicao extends Equatable {
 
   Instituicao({this.id, required this.nome});
 
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'nome': nome,
+    };
+  }
+
   @override
   List<Object> get props => [nome];
 }

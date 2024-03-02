@@ -8,15 +8,14 @@ class Cliente extends Equatable {
   late int? id;
   late Float? saldo;
   final String nome;
-  final int idade;
-
+  final String numero_celular;
   final int? instituicao_fk;
 
   Cliente({
     this.id,
     this.saldo,
     required this.nome,
-    required this.idade,
+    required this.numero_celular,
     required this.instituicao_fk,
   });
 
@@ -25,16 +24,16 @@ class Cliente extends Equatable {
       'id': id,
       'saldo': saldo,
       'nome': nome,
-      'idade': idade,
+      'numero_celular': numero_celular,
       'instituicao_fk': instituicao_fk
     };
   }
 
   @override
   String toString() {
-    return 'Person{id: $id, nome: $nome, idade: $idade, saldo: $saldo, instituicao_fk: $instituicao_fk}';
+    return 'Person{id: $id, nome: $nome, saldo: $saldo, numero_celular: $numero_celular, instituicao_fk: $instituicao_fk}';
   }
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, saldo];
 }

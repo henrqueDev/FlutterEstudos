@@ -6,8 +6,8 @@ const String databaseName = "lanchonete.db";
 
 const int databaseVersion = 1;
 
-const createAllTables = '''
-  $createInstituicoesTable
-  $createClientesTable
-  $createTablePreferences
-''';
+const createAllTables = [
+  createInstituicoesTable,
+  createClientesTable,
+  createTablePreferences
+];

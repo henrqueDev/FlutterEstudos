@@ -20,7 +20,9 @@ class ClientesDataSource {
     _ClientesdataSource ??= await openDatabase(
       join(await getDatabasesPath(), databaseName),
       onCreate: (db, version) async {
-        await db.execute(createAllTables);
+        for (String query in createAllTables) {
+          await db.execute(query);
+        }
       },
       version: databaseVersion,
     );
